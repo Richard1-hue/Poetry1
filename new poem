@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Poetry Speaks Louder</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(111, 48, 170, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(75, 24, 116, 0.2), transparent 35%),
+        linear-gradient(135deg, #08030d, #12051d 45%, #09030e);
+    color: #eee5f5;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND STARS
+========================= */
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    animation: twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%,100% { opacity: .2; transform: scale(.7); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(5,1,9,.8), transparent);
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    letter-spacing: 3px;
+    color: #f3e9fa;
+}
+
+.logo span {
+    color: #a86bd4;
+}
+
+nav a {
+    color: #d9c9e2;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .72rem;
+    letter-spacing: 2px;
+    margin-left: 30px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #c995eb;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero-content {
+    max-width: 950px;
+    animation: entrance 2s ease forwards;
+}
+
+@keyframes entrance {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.small-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .7rem;
+    letter-spacing: 6px;
+    color: #a875c9;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 400;
+    line-height: .9;
+    letter-spacing: -5px;
+}
+
+.hero h1 em {
+    color: #b879e2;
+    font-weight: 400;
+}
+
+.hero-description {
+    max-width: 650px;
+    margin: 35px auto;
+    color: #b9a8c2;
+    font-size: 1.35rem;
+    line-height: 1.7;
+}
+
+.enter {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 35px;
+    border: 1px solid rgba(184,121,226,.5);
+    color: #e7d7ef;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .68rem;
+    letter-spacing: 3px;
+    transition: .4s;
+}
+
+.enter:hover {
+    background: #8b45b3;
+    border-color: #8b45b3;
+    box-shadow: 0 0 30px rgba(150,70,200,.3);
+}
+
+/* =========================
+   POETRY SECTION
+========================= */
+
+.poetry-world {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: 120px 0;
+    overflow: hidden;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.section-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 400;
+}
+
+.section-heading p {
+    color: #8f7c9a;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .65rem;
+    letter-spacing: 4px;
+    margin-top: 15px;
+}
+
+/* SLIDER */
+
+.poem-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.poem-track {
+    display: flex;
+    width: max-content;
+    animation: slidePoems 55s linear infinite;
+}
+
+.poem-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes slidePoems {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.poem {
+    width: 440px;
+    min-height: 510px;
+    margin: 0 15px;
+    padding: 55px 45px;
+    position: relative;
+
+    background:
+        linear-gradient(145deg,
+        rgba(54,22,73,.55),
+        rgba(19,7,29,.85));
+
+    border: 1px solid rgba(174,115,205,.18);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.4),
+        inset 0 0 80px rgba(107,45,140,.06);
+
+    transition: .5s;
+}
+
+.poem:hover {
+    transform: translateY(-15px);
+    border-color: rgba(190,130,224,.5);
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.5),
+        0 0 40px rgba(127,53,164,.15);
+}
+
+.poem-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: .65rem;
+    letter-spacing: 3px;
+    color: #8c5ca7;
+}
+
+.poem h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.1rem;
+    font-weight: 400;
+    margin: 30px 0;
+    color: #f0e3f5;
+}
+
+.poem p {
+    color: #c0aec8;
+    font-size: 1.3rem;
+    line-height: 1.65;
+}
+
+.poem p em {
+    color: #d197ed;
+}
+
+.author {
+    position: absolute;
+    bottom: 35px;
+    left: 45px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .58rem;
+    letter-spacing: 3px;
+    color: #755982;
+}
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote-section {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.quote {
+    max-width: 900px;
+}
+
+.quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    line-height: .4;
+    color: #743d91;
+}
+
+.quote h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 1.15;
+}
+
+.quote p {
+    margin-top: 30px;
+    color: #927f9d;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .65rem;
+    letter-spacing: 3px;
+}
+
+/* =========================
+   FINAL SECTION
+========================= */
+
+.final {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 80px 20px;
+}
+
+.final-inner {
+    max-width: 800px;
+}
+
+.final h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 400;
+}
+
+.final h2 span {
+    color: #a965cf;
+}
+
+.final p {
+    font-size: 1.35rem;
+    line-height: 1.7;
+    color: #ad9bb7;
+    margin: 30px auto;
+    max-width: 600px;
+}
+
+.final-line {
+    width: 100px;
+    height: 1px;
+    background: #8e55a9;
+    margin: 40px auto;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    position: relative;
+    z-index: 2;
+    padding: 35px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,.05);
+    color: #66536d;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .6rem;
+    letter-spacing: 3px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px) {
+
+    nav {
+        padding: 20px;
+    }
+
+    nav .links {
+        display: none;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero-description {
+        font-size: 1.15rem;
+    }
+
+    .poem {
+        width: 310px;
+        min-height: 480px;
+        padding: 40px 30px;
+    }
+
+    .poem h3 {
+        font-size: 1.8rem;
+    }
+
+    .poem p {
+        font-size: 1.15rem;
+    }
+
+    .author {
+        left: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="stars" id="stars"></div>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="logo">POETRY <span>SPEAKS</span> LOUDER</div>
+
+    <div class="links">
+        <a href="#home">HOME</a>
+        <a href="#poetry">POEMS</a>
+        <a href="#meaning">MEANING</a>
+    </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            Enter the world between the words
+        </div>
+
+        <h1>
+            Poetry<br>
+            <em>Speaks</em> Louder
+        </h1>
+
+        <p class="hero-description">
+            Some feelings are too deep for ordinary language.
+            So we give them metaphors, give them silence,
+            and sometimes give them a universe of their own.
+        </p>
+
+        <a href="#poetry" class="enter">
+            ENTER THE POETIC WORLD
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- POETRY WORLD -->
+<section class="poetry-world" id="poetry">
+
+    <div class="section-heading">
+
+        <div class="small-title">
+            The world between the lines
+        </div>
+
+        <h2>Where Words Become Worlds</h2>
+
+        <p>MOVE YOUR EYES. LET THE POEMS MOVE YOU.</p>
+
+    </div>
+
+
+    <div class="poem-slider">
+
+        <div class="poem-track">
+
+
+            <!-- POEM 01 -->
+            <article class="poem">
+
+                <div class="poem-number">01 / THE FIRST DOOR</div>
+
+                <h3>The Moon Forgot Me</h3>
+
+                <p>
+                    Last night, the moon forgot my name.
+                    <br><br>
+                    So I wrote it on the ocean,
+                    and watched the waves erase me
+                    one letter at a time.
+                    <br><br>
+                    Perhaps that is what becoming is—
+                    <em>learning to exist after the world
+                    has stopped remembering you.</em>
+                </p>
+
+                <div class="author">POETRY SPEAKS LOUDER</div>
+
+            </article>
+
+
+            <!-- POEM 02 -->
+            <article class="poem">
+
+                <div class="poem-number">02 / THE SECOND DOOR</div>
+
+                <h3>She Was A Sunrise</h3>
+
+                <p>
+                    She did not enter my life like a person.
+                    <br><br>
+                    She arrived like morning—
+                    quietly convincing the darkness
+                    that it had somewhere else to be.
+                    <br><br>
+                    And suddenly,
+                    even my shadows began
+                    <em>learning how to bloom.</em>
+                </p>
+
+                <div class="author">POETRY SPEAKS LOUDER</div>
+
+            </article>
+
+
+            <!-- POEM 03 -->
+            <article class="poem">
+
+                <div class="poem-number">03 / THE THIRD DOOR</div>
+
+                <h3>My Heart Is A House</h3>
+
+                <p>
+                    My heart is a house
+                    built beside a forgotten river.
+                    <br><br>
+                    Every room carries an echo.
+                    Every window waits for rain.
+                    <br><br>
+                    And you—
+                    you were not a guest.
+                    You were the key
+                    <em>that taught the doors
+                    why they were made.</em>
+                </p>
+
+                <div class="author">POETRY SPEAKS LOUDER</div>
+
+            </article>
+
+
+            <!-- POEM 04 -->
+            <article class="poem">
+
+                <div class="poem-number">04 / THE FOURTH DOOR</div>
+
+                <h3>We Were Two Rivers</h3>
+
+                <p>
+                    We were two rivers
+                    pretending we had separate destinations.
+                    <br><br>
+                    We crossed mountains,
+                    swallowed stones,
+                    survived droughts.
+                    <br><br>
+                    Until one evening
+                    our waters touched
+                    and the world called it
+                    <em>love.</em>
+                </p>
+
+                <div class="author">POETRY SPEAKS LOUDER</div>
+
+            </article>
+
+
+            <!-- POEM 05 -->
+            <article class="poem">
+
+                <div class="poem-number">05 / THE FIFTH DOOR</div>
+
+                <h3>I Planted A Star</h3>
+
+                <p>
+                    I buried a star
+                    beneath the soil of yesterday.
+                    <br><br>
+                    Everyone told me
+                    stars belong to the sky.
+                    <br><br>
+                    But I waited.
+                    <br><br>
+                    And when tomorrow came,
+                    <em>you grew.</em>
+                </p>
+
+                <div class="author">POETRY SPEAKS LOUDER</div>
+
+            </article>
+
+
+            <!-- POEM 06 -->
+            <article class="poem">
+
+                <div class="poem-number">06 / THE SIXTH DOOR</div>
+
+                <h3>The Silence Between Us</h3>
+
+                <p>
+                    There was a silence between us
+                    larger than language.
+                    <br><br>
+                    I placed my heart inside it
+                    like a candle inside a cathedral.
+                    <br><br>
+                    You said nothing.
+                    <br><br>
+                    Yet somehow,
+                    <em>the silence answered.</em>
+                </p>
+
+                <div class="author">POETRY SPEAKS LOUDER</div>
+
+            </article>
+
+
+            <!-- POEM 07 -->
+            <article class="poem">
+
+                <div class="poem-number">07 / THE SEVENTH DOOR</div>
+
+                <h3>Time Sat Beside Us</h3>
+
+                <p>
+                    Time sat beside us
+                    pretending not to watch.
+                    <br><br>
+                    Minutes became birds.
+                    Hours became clouds.
+                    <br><br>
+                    And somewhere between your laughter
+                    and my unfinished sentence,
+                    <em>forever forgot how to leave.</em>
+                </p>
+
+                <div class="author">POETRY SPEAKS LOUDER</div>
+
+            </article>
+
+
+            <!-- DUPLICATE SET FOR INFINITE SLIDER -->
+
+            <article class="poem">
+                <div class="poem-number">01 / THE FIRST DOOR</div>
+                <h3>The Moon Forgot Me</h3>
+                <p>
+                    Last night, the moon forgot my name.
+                    <br><br>
+                    So I wrote it on the ocean,
+                    and watched the waves erase me
+                    one letter at a time.
+                    <br><br>
+                    Perhaps that is what becoming is—
+                    <em>learning to exist after the world
+                    has stopped remembering you.</em>
+                </p>
+                <div class="author">POETRY SPEAKS LOUDER</div>
+            </article>
+
+
+            <article class="poem">
+                <div class="poem-number">02 / THE SECOND DOOR</div>
+                <h3>She Was A Sunrise</h3>
+                <p>
+                    She did not enter my life like a person.
+                    <br><br>
+                    She arrived like morning—
+                    quietly convincing the darkness
+                    that it had somewhere else to be.
+                    <br><br>
+                    And suddenly,
+                    even my shadows began
+                    <em>learning how to bloom.</em>
+                </p>
+                <div class="author">POETRY SPEAKS LOUDER</div>
+            </article>
+
+
+            <article class="poem">
+                <div class="poem-number">03 / THE THIRD DOOR</div>
+                <h3>My Heart Is A House</h3>
+                <p>
+                    My heart is a house
+                    built beside a forgotten river.
+                    <br><br>
+                    Every room carries an echo.
+                    Every window waits for rain.
+                    <br><br>
+                    And you—
+                    you were not a guest.
+                    You were the key
+                    <em>that taught the doors
+                    why they were made.</em>
+                </p>
+                <div class="author">POETRY SPEAKS LOUDER</div>
+            </article>
+
+
+            <article class="poem">
+                <div class="poem-number">04 / THE FOURTH DOOR</div>
+                <h3>We Were Two Rivers</h3>
+                <p>
+                    We were two rivers
+                    pretending we had separate destinations.
+                    <br><br>
+                    We crossed mountains,
+                    swallowed stones,
+                    survived droughts.
+                    <br><br>
+                    Until one evening
+                    our waters touched
+                    and the world called it
+                    <em>love.</em>
+                </p>
+                <div class="author">POETRY SPEAKS LOUDER</div>
+            </article>
+
+
+            <article class="poem">
+                <div class="poem-number">05 / THE FIFTH DOOR</div>
+                <h3>I Planted A Star</h3>
+                <p>
+                    I buried a star
+                    beneath the soil of yesterday.
+                    <br><br>
+                    Everyone told me
+                    stars belong to the sky.
+                    <br><br>
+                    But I waited.
+                    <br><br>
+                    And when tomorrow came,
+                    <em>you grew.</em>
+                </p>
+                <div class="author">POETRY SPEAKS LOUDER</div>
+            </article>
+
+
+            <article class="poem">
+                <div class="poem-number">06 / THE SIXTH DOOR</div>
+                <h3>The Silence Between Us</h3>
+                <p>
+                    There was a silence between us
+                    larger than language.
+                    <br><br>
+                    I placed my heart inside it
+                    like a candle inside a cathedral.
+                    <br><br>
+                    You said nothing.
+                    <br><br>
+                    Yet somehow,
+                    <em>the silence answered.</em>
+                </p>
+                <div class="author">POETRY SPEAKS LOUDER</div>
+            </article>
+
+
+            <article class="poem">
+                <div class="poem-number">07 / THE SEVENTH DOOR</div>
+                <h3>Time Sat Beside Us</h3>
+                <p>
+                    Time sat beside us
+                    pretending not to watch.
+                    <br><br>
+                    Minutes became birds.
+                    Hours became clouds.
+                    <br><br>
+                    And somewhere between your laughter
+                    and my unfinished sentence,
+                    <em>forever forgot how to leave.</em>
+                </p>
+                <div class="author">POETRY SPEAKS LOUDER</div>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUOTE -->
+<section class="quote" id="meaning">
+
+    <div class="quote-section">
+
+        <div>
+
+            <div class="quote-mark">“</div>
+
+            <h2>
+                When the mouth becomes
+                too small for the heart,
+                poetry becomes its voice.
+            </h2>
+
+            <p>
+                SOME THINGS ARE NOT WRITTEN TO BE READ.
+                THEY ARE WRITTEN TO BE FELT.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+<section class="final">
+
+    <div class="final-inner">
+
+        <div class="small-title">
+            And the world keeps writing...
+        </div>
+
+        <h2>
+            Let your soul<br>
+            <span>speak louder.</span>
+        </h2>
+
+        <div class="final-line"></div>
+
+        <p>
+            Perhaps poetry was never meant to explain
+            what we feel. Perhaps it was created because
+            some emotions are too enormous for explanation.
+            They need oceans. They need stars.
+            They need metaphors.
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+    POETRY SPEAKS LOUDER · WHERE WORDS BECOME WORLDS
+</footer>
+
+
+<script>
+
+/* =========================
+   CREATE STARS
+========================= */
+
+const stars = document.getElementById("stars");
+
+for(let i = 0; i < 120; i++){
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 4 + "s";
+
+    star.style.opacity =
+        Math.random();
+
+    stars.appendChild(star);
+}
+
+
+/* =========================
+   SMOOTH NAVIGATION
+========================= */
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        const target =
+            document.querySelector(this.getAttribute("href"));
+
+        if(target){
+
+            target.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
